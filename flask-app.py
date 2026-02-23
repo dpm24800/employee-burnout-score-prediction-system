@@ -12,7 +12,6 @@ app = application
 def index():
     return render_template('index.html')
 
-
 @app.route('/predictdata', methods=['GET', 'POST'])
 def predict_datapoint():
 
@@ -97,6 +96,11 @@ def predict_datapoint():
                 error=f"An error occurred: {str(e)}"
             )
 
+import os
 
 if __name__ == "__main__":
+    if os.environ.get("WERKZEUG_RUN_MAIN") == "true":
+        url = "http://127.0.0.1:8000/"
+        print(f"\n✅ Your Flask app is running! \n Ctrl + Click to open: {url}\n")
+    
     app.run(debug=True, port=8000)
